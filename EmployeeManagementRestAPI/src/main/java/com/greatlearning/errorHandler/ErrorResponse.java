@@ -1,4 +1,4 @@
-package com.greatlearning.entity;
+package com.greatlearning.errorHandler;
 
 public class ErrorResponse {
     private int status;
