@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EntityScan( basePackages = {"com.greatlearning.entity"} )
-@EnableJpaRepositories("com.greatlearning.dao")
+@EnableJpaRepositories(basePackages = "com.greatlearning.dao")
 @SpringBootApplication(scanBasePackages = { "com.greatlearning.*" })
 public class EmployeeManagementRestApiApplication {
 

@@ -37,4 +37,19 @@ public class EmployeeServiceJpaRepositoryImpl implements EmployeeService {
     public void deleteById(int id) {
         employeeDAOJPARepository.deleteById(id);
     }
+
+    @Override
+    public List<Employee> sortByFirstName(String sortOrder) {
+        if(sortOrder.equalsIgnoreCase("asc"))
+            return employeeDAOJPARepository.findAllByOrderByFirstNameAsc();
+        else if(sortOrder.equalsIgnoreCase("desc"))
+            return employeeDAOJPARepository.findAllByOrderByFirstNameDesc();
+
+        return null;
+    }
+
+    @Override
+    public List<Employee> searchByFirstName(String firstName) {
+        return employeeDAOJPARepository.findEmployeesByFirstName(firstName);
+    }
 }

@@ -3,7 +3,7 @@ package com.greatlearning.entity;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "EMPLOYEES")
+@Table(name = "EMPLOYEES")
 public class Employee {
     @Id
     @Column(name = "id")

@@ -38,4 +38,16 @@ public class EmployeeServiceJpaImpl implements EmployeeService {
     public void deleteById(int id) {
         employeeDAO.deleteById(id);
     }
+
+    @Transactional
+    @Override
+    public List<Employee> sortByFirstName(String sortOrder) {
+        return employeeDAO.sortByFirstName(sortOrder);
+    }
+
+    @Transactional
+    @Override
+    public List<Employee> searchByFirstName(String firstName) {
+        return employeeDAO.searchByFirstName(firstName);
+    }
 }

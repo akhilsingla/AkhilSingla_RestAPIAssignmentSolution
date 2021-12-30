@@ -43,4 +43,16 @@ public class EmployeeRestController {
         employeeService.deleteById(employeeId);
         return "Deleted employee having id : " + employeeId;
     }
+
+    @GetMapping("/employees/sort")
+    public List<Employee> getSortedListOfEmployees(@RequestParam("order") String sortOrder)
+    {
+        return employeeService.sortByFirstName(sortOrder);
+    }
+
+    @GetMapping("/employees/search/{searchString}")
+    public List<Employee> searchEmployeedOnFirstName(@PathVariable String searchString)
+    {
+        return employeeService.searchByFirstName(searchString);
+    }
 }

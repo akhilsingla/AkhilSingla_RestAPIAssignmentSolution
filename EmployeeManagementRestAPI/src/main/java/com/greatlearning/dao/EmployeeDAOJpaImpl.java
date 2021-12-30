@@ -37,4 +37,17 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
         query.setParameter("employeeId", id);
         query.executeUpdate();
     }
+
+    @Override
+    public List<Employee> sortByFirstName(String sortOrder) {
+        Query query = entityManager.createQuery("select s from Employee as s order by s.firstName " + sortOrder, Employee.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Employee> searchByFirstName(String firstName) {
+        Query query = entityManager.createQuery("select s from Employee s where s.firstName=:firstName", Employee.class);
+        query.setParameter("firstName", firstName);
+        return query.getResultList();
+    }
 }
