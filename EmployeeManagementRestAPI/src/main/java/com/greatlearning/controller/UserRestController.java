@@ -16,8 +16,7 @@ public class UserRestController {
     private UserService userService;
 
     @PostMapping("/users")
-    public void addUser(@RequestBody User user)
-    {
+    public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 }

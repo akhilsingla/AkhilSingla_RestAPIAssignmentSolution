@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceJpaRepositoryImpl implements UserService{
+public class UserServiceJpaRepositoryImpl implements UserService {
 
     @Autowired
     UserDAOJpaRepository userServiceJpaRepository;

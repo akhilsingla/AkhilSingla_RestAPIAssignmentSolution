@@ -40,9 +40,9 @@ public class EmployeeServiceJpaRepositoryImpl implements EmployeeService {
 
     @Override
     public List<Employee> sortByFirstName(String sortOrder) {
-        if(sortOrder.equalsIgnoreCase("asc"))
+        if (sortOrder.equalsIgnoreCase("asc"))
             return employeeDAOJPARepository.findAllByOrderByFirstNameAsc();
-        else if(sortOrder.equalsIgnoreCase("desc"))
+        else if (sortOrder.equalsIgnoreCase("desc"))
             return employeeDAOJPARepository.findAllByOrderByFirstNameDesc();
 
         return null;

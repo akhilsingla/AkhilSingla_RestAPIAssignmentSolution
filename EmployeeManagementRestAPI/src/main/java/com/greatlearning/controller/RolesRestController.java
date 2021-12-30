@@ -2,7 +2,6 @@ package com.greatlearning.controller;
 
 import com.greatlearning.entity.Role;
 import com.greatlearning.service.RoleService;
-import com.greatlearning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +16,7 @@ public class RolesRestController {
     private RoleService roleService;
 
     @PostMapping("/roles")
-    public void addRole(@RequestBody Role role)
-    {
+    public void addRole(@RequestBody Role role) {
         roleService.addRole(role);
     }
 }

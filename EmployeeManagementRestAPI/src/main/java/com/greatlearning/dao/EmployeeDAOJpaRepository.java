@@ -8,6 +8,8 @@ import java.util.List;
 public interface EmployeeDAOJpaRepository extends JpaRepository<Employee, Integer> {
 
     List<Employee> findAllByOrderByFirstNameAsc();
+
     List<Employee> findAllByOrderByFirstNameDesc();
+
     List<Employee> findEmployeesByFirstName(String firstName);
 }
