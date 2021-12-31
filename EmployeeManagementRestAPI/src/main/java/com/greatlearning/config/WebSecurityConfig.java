@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -25,28 +26,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.authenticationProvider(authenticationProvider());
-
-        auth.inMemoryAuthentication().withUser("admin").password("123").roles("ADMIN").
-        and().withUser("user").password("123").roles("USER");
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
-                antMatchers(HttpMethod.POST, "/api/employees/**").access("hasRole(\"ADMIN\")").
-                antMatchers(HttpMethod.PUT, "/api/employees/**").access("hasRole(\"ADMIN\")").
-                antMatchers(HttpMethod.DELETE, "/api/employees/**").access("hasRole(\"ADMIN\")").
+                antMatchers(HttpMethod.POST, "/api/employees/").hasAuthority("ADMIN").
+                antMatchers(HttpMethod.PUT, "/api/employees/").hasAnyAuthority("ADMIN","USER").
+                antMatchers(HttpMethod.DELETE, "/api/employees/**").hasAuthority("ADMIN").
                 antMatchers(HttpMethod.GET, "/api/employees/**").permitAll().
                 antMatchers("/roles").permitAll().
                 antMatchers("/users").permitAll().
                 and().httpBasic().
-                and().csrf().disable();
-                //sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                and().csrf().disable().
+                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        //return new BCryptPasswordEncoder();
         return NoOpPasswordEncoder.getInstance();
     }
 
