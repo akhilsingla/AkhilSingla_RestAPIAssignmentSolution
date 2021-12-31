@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers(HttpMethod.PUT, "/api/employees/**").hasAnyAuthority("ADMIN", "USER").
                 antMatchers(HttpMethod.DELETE, "/api/employees/**").hasAuthority("ADMIN").
                 antMatchers(HttpMethod.GET, "/api/employees/**").permitAll().
-                antMatchers(HttpMethod.POST,"/api/roles/**").hasAuthority("ADMIN").
-                antMatchers(HttpMethod.POST,"/api/users/**").hasAuthority("ADMIN").
+                antMatchers(HttpMethod.POST, "/api/roles/**").hasAuthority("ADMIN").
+                antMatchers(HttpMethod.POST, "/api/users/**").hasAuthority("ADMIN").
                 and().httpBasic().
                 and().csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
