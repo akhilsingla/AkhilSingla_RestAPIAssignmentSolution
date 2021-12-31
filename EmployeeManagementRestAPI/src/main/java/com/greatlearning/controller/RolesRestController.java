@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RolesRestController {
 
     @Autowired
-    @Qualifier("roleServiceJpaRepositoryImpl")
+    @Qualifier("roleServiceJpaImpl")
     private RoleService roleService;
 
     @PostMapping("/roles")

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRestController {
 
     @Autowired
-    @Qualifier("userServiceJpaRepositoryImpl")
+    @Qualifier("userServiceJpaImpl")
     private UserService userService;
 
     @PostMapping("/users")
