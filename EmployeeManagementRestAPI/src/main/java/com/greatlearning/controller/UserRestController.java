@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRestController {
 
     @Autowired
-    @Qualifier("userServiceJpaImpl")
+    @Qualifier("userServiceJpaRepositoryImpl")
     private UserService userService;
 
     @PostMapping("/users")
