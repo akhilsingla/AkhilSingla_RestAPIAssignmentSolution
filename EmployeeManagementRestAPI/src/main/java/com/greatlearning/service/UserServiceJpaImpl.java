@@ -12,25 +12,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceJpaImpl implements UserService {
 
-    // need to inject user dao
+    @Autowired
+    PasswordEncoderService passwordEncoder;
     @Autowired
     private UserDao userDao;
 
     @Override
     @Transactional
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.getPasswordEncoder().encode(user.getPassword()));
         userDao.addUser(user);
     }
 
     @Override
     @Transactional
     public User findByUserName(String userName) {
-        // check the database if the user already exists
         return userDao.findByUsername(userName);
     }
 
@@ -42,14 +44,15 @@ public class UserServiceJpaImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-
-        System.out.println("Roles :::::::::::::  " + user.getRoles());
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+
+        List list = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList()).stream().toList();
+        list.forEach(System.out::println);
+
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 }
