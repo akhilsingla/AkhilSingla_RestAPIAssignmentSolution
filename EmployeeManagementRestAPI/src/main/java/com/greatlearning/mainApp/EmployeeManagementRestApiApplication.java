@@ -2,7 +2,6 @@ package com.greatlearning.mainApp;
 
 import com.greatlearning.entity.Role;
 import com.greatlearning.entity.User;
-import com.greatlearning.service.PasswordEncoderService;
 import com.greatlearning.service.UserService;
 import com.greatlearning.service.UserServiceJpaRepositoryImpl;
 import org.springframework.boot.SpringApplication;
@@ -25,8 +24,7 @@ public class EmployeeManagementRestApiApplication {
 
         //populate initial user entry in database having role as ADMIN
         UserService userServiceJpaRepository = applicationContext.getBean(UserServiceJpaRepositoryImpl.class);
-        PasswordEncoderService passwordEncoderService = applicationContext.getBean(PasswordEncoderService.class);
-        User user = new User("Akhil_Admin", passwordEncoderService.getPasswordEncoder().encode("123"));
+        User user = new User("Akhil", "123");
         List<Role> roleList = new LinkedList<Role>();
         roleList.add(new Role("ADMIN"));
         user.setRoles(roleList);

@@ -19,22 +19,27 @@ public class UserServiceJpaRepositoryImpl implements UserService {
     @Autowired
     UserDAOJpaRepository userServiceJpaRepository;
 
+    @Autowired
+    PasswordEncoderService passwordEncoder;
+
     @Override
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.getPasswordEncoder().encode(user.getPassword()));
         userServiceJpaRepository.save(user);
     }
 
     @Override
     public User findByUserName(String username) {
-        return userServiceJpaRepository.findUserByUsername(username);
+        return userServiceJpaRepository.findUser(username);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userServiceJpaRepository.findUserByUsername(username);
+        User user = userServiceJpaRepository.findUser(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }

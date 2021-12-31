@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +35,6 @@ public class UserServiceJpaImpl implements UserService {
         return userDao.findByUsername(userName);
     }
 
-
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -44,15 +42,12 @@ public class UserServiceJpaImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-
-        List list = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList()).stream().toList();
-        list.forEach(System.out::println);
-
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 }
