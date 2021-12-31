@@ -19,7 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    @Qualifier("userServiceJpaImpl")
+    @Qualifier("userServiceJpaRepositoryImpl")
     private UserService userService;
 
     @Autowired
